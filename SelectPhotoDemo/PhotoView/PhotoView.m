@@ -46,20 +46,23 @@
     return _photoArr;
 }
 
-
+#pragma mark - 懒加载scrollview
 - (UIScrollView *)sView{
     
     if (!_sView) {
         
         _sView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _sView.showsHorizontalScrollIndicator = NO;
-        _sView.contentSize = CGSizeMake(ScreenWidth * 2, 0);
+        _sView.contentSize = CGSizeMake(ScreenWidth, 0);
+        
+        //添加首个btn
         [_sView addSubview:self.firstBtn];
     }
     
     return _sView;
 }
 
+#pragma mark - 懒加载首个btn
 - (UIButton *)firstBtn{
     
     if (!_firstBtn) {
@@ -180,12 +183,10 @@
             [deleteBtn addTarget:self action:@selector(onDeletebtn:) forControlEvents:UIControlEventTouchUpInside];
             [self.sView addSubview:deleteBtn];
         }
-        
-        
-        
+    
     }
+    
     self.sView.contentSize = CGSizeMake(((PHOTOVIEWHEIGHT - 20) + 20) * self.photoArr.count, 0);
-   // self.sView.constant = (100 + 20) * self.photoArr.count;
     
 }
 - (void)onDeletebtn:(UIButton *)btn{
